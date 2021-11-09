@@ -1,7 +1,10 @@
 // require('dotenv').config({
 //     path: './'
 // })
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, './../config/.env') })
 require('dotenv').config()
+
 
 const express = require('express')
 const cors = require("cors")
@@ -38,7 +41,7 @@ app.set('port', port);
 app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({limit: '25mb'}));
 app.use(cors({
-    origin:["http://localhost:3000"],
+    origin:["http://localhost:3000","https://eshop-spot-frontend.herokuapp.com"],
     credentials:true
 }));
 
