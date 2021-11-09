@@ -28,6 +28,7 @@ const productRouter = require('./routers/product')
 const cartRouter = require('./routers/cart')
 const orderRouter = require('./routers/order')
 const app = express()
+var session = require('express-session');
 
 const port = process.env.PORT
 
@@ -38,12 +39,20 @@ app.set('port', port);
 
 
 // For parsing application/json
+app.enable('trust proxy')
 app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({limit: '25mb'}));
 app.use(cors({
     origin:["http://localhost:3000","https://eshop-spot-frontend.herokuapp.com"],
     credentials:true
 }));
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 
 
