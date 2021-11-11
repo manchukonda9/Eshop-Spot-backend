@@ -4,9 +4,16 @@ const Customer = require('../models/customer')
 const customerAuth = async(req,res,next) =>{
     try{
         console.log('Before barrer')
-        const token = req.header('Authorization').replace('Bearer ','')
+        var token = ""
+        if(req.header('Authorization') != null){
+            token = req.header('Authorization').replace('Bearer ','')
+        }
+        else if(token == "" && req.body.headers.Authorization!= null) {
+            const Auth = req.body.headers.Authorization
+            token = Auth.replace('Bearer ','')
+        }
         console.log('token verify', token)
-        const decoded = jwt.verify(token,'thisismynewcourse')
+        const decoded = jwt.verify(token,process.env.TOKEN_SECRET)
 
         console.log(decoded)
         const customer = await Customer.findOne({_id:decoded._id,'tokens.token':token})

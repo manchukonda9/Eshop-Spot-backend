@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
     },
     productlist:[{
         status:{type:String,default:"Order Placed"},
-       
+        returnReason:{type:String,default:"-"},
         quantity: {type:Number},
         product:{
         type: mongoose.Schema.Types.ObjectId,

@@ -158,7 +158,8 @@ router.get('/vendors/dashboard', auth ,async (req,res)=>{
                    "order_id":ord._id,
                    "status":p.status,
                    "product":p.product,
-                   "quantity":p.quantity
+                   "quantity":p.quantity,
+                   "returnReason":p.returnReason
 
                }
                 allProds.push(temp)
@@ -198,7 +199,9 @@ router.get('/vendors/dashboard', auth ,async (req,res)=>{
                                             "quantity":myAllProds[j].quantity,
                                             "price":myAllProds[j].price,
                                             "product_id":myAllProds[j]._id,
-                                            "OrderStatus":allProds[i].status
+                                            "OrderStatus":allProds[i].status,
+                                            "returnReason":allProds[i].returnReason,
+
                     
                     
                                         }

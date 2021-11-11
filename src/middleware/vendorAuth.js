@@ -4,15 +4,19 @@ const Vendor = require('../models/vendor')
 const vendorAuth = async(req,res,next) =>{
     try{
         console.log('Before barrer')
-        console.log(req)
+        var token = ""
+        if(req.header('Authorization') != null){
+            token = req.header('Authorization').replace('Bearer ','')
+        }
+        else if(token == "" && req.body.headers.Authorization!= null) {
+            const Auth = req.body.headers.Authorization
+            token = Auth.replace('Bearer ','')
+        }
 
-        // const authHeader = req.headers['Authorization']
-        // const token = authHeader && authHeader.split(' ')[1]
-        const token = req.header('Authorization').replace('Bearer ','')
         console.log('token verify',req)
-        const decoded = jwt.verify(token,'thisismynewcourse')
+        const decoded = jwt.verify(token,process.env.TOKEN_SECRET)
 
-        console.log(decoded)
+        // console.log(decoded)
         const vendor = await Vendor.findOne({_id:decoded._id,'tokens.token':token})
         console.log('after vendor')
         if(!vendor){

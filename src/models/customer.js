@@ -113,7 +113,7 @@ customerSchema.methods.toJSON =  function(){
 customerSchema.methods.generateAuthToken = async function(){
 
     const customer = this
-    const token = jwt.sign({ _id:customer._id.toString() },process.env.JWT_SECRET)
+    const token = jwt.sign({ _id:customer._id.toString() },'thisismynewcourse')
     customer.tokens = customer.tokens.concat({token})
     await customer.save()
     return token
