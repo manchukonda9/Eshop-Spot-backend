@@ -49,12 +49,7 @@ router.post('/order/add', auth,async (req,res) =>{
             }
             });
 
-    // prodlist.forEach(prod =>{
-        
-    //     const product = Product.findByIdAndUpdate(prod.product,{quantity: quantity-prod.productlist})
-    // }
- 
-   
+
     
     console.log("cart1",cart)
     }catch(err){

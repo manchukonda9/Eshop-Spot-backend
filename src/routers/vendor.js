@@ -181,62 +181,37 @@ router.get('/vendors/dashboard', auth ,async (req,res)=>{
     var prodsol=0;
     var resList=[]
     var temp={}
-    console.log("all rpods in order",allProds)
-    console.log("all my prods",myAllProds)
+    // console.log("all rpods in order",allProds)
+    // console.log("all my prods",myAllProds)
     for(var i=0;i<allProds.length;i++){
         for(var j=0;j<myAllProds.length;j++){
-            console.log(allProds[i].product+"-------"+myAllProds[j]._id)
-            console.log(allProds[0].priduct)
-            if(allProds[i].product.equals( myAllProds[j]._id)){
-                console.log("In if")
+            // console.log(allProds[i].product+"-------"+myAllProds[j]._id)
+            // console.log(allProds[0].priduct)
+            if(allProds[i].product != null && allProds[i].product.equals( myAllProds[j]._id)){
+                // console.log("In if")
                 total = total + (myAllProds[j].price * allProds[i].quantity)
                     prodsol = prodsol + allProds[i].quantity
                     popProd.push(myAllProds[j])
-                    console.log("In if condition")
+                    // console.log("In if condition")
+                    // console.log(allProds[i], '***',allProds[j]);
+                    // console.log(allProds[i].order_id, '-----',allProds[j].quantity);
+
                 temp ={
                                             "order_id":allProds[i].order_id,
                                             "productName":myAllProds[j].name,
-                                            "quantity":myAllProds[j].quantity,
+                                            "quantity":allProds[i].quantity,
                                             "price":myAllProds[j].price,
                                             "product_id":myAllProds[j]._id,
                                             "OrderStatus":allProds[i].status,
                                             "returnReason":allProds[i].returnReason,
-
-                    
                     
                                         }
                                         resList.push(temp)
             }
         }
     }
-    console.log(total)
-//     for(var i =0;i<ords.length;i++){
-//         // console.log("In orders loops",ords[i])
-//         for(var j=0;j<ords[i].productlist;j++){
-//         console.log("In prodslist",ords[i].productlist[j])
-//             for( var k=0;k<myAllProds.length;k++){
-//                 if(myAllProds[k]._id == ords[i].productlist[j].product){
-//                     total = total + (myAllProds[k].price * ord[i].productlist[j].quantity)
-//                     prodsol = prodsol + ord[i].productlist[j].quantity
-//                     popProd.push(myAllProds[k])
-//                     console.log("In if condition")
-                
-//                     temp ={
-//                         "order_id":ords[i]._id,
-//                         "productName":myAllProds[k].name,
-//                         "quantity":myAllProds[k].quantity,
-//                         "price":myAllProds[k].price,
-//                         "product_id":myAllProds[k]._id,
-//                         "OrderStatus":ord[i].productlist[k].status
+    // console.log(total)
 
-
-//                     }
-//                     resList.push(temp)
-
-//                 }
-//             }
-//         }
-//     }
    const chaos = Math.floor(Math.random() * popProd.length);
    const pop =  popProd[chaos];
    var resJson = {
@@ -245,7 +220,7 @@ router.get('/vendors/dashboard', auth ,async (req,res)=>{
        "ProductsSold":prodsol,
        "populatProd":pop
    }
-   console.log(resJson)
+//    console.log(resJson)
    res.send(resJson)
 
 
